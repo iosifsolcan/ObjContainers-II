@@ -6,7 +6,7 @@ public class Run {
     public void RunApp()
     {
         SalesRepresentative representatives=new SalesRepresentative();
-        representatives.AddPersons();
+        representatives.addPersons();
         representatives.printPersons(representatives.getRepresentatives());
         SalesRepresentative [ ] sortedRepresentatives=representatives.sort(representatives.getRepresentatives());
         representatives.printPersons(sortedRepresentatives);

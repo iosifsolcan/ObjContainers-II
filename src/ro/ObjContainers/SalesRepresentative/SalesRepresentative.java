@@ -11,7 +11,7 @@ public class SalesRepresentative {
     Scanner sc=new Scanner(System.in);
     SalesRepresentative[] representatives;
 
-    public void AddPersons()
+    public void addPersons()
     {
         System.out.println("how many persons u wanna add?");
         numberOfPersons=sc.nextInt();
