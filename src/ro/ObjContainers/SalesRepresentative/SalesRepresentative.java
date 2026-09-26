@@ -1,58 +1,89 @@
 package ro.ObjContainers.SalesRepresentative;
 
-import ro.ObjContainers.AddPerson.AddPerson;
 
-import java.util.List;
 
+import java.util.*;
 
 public class SalesRepresentative {
-    public String name;
-    public int numberOfSales,worthOfSales;
-    List<SalesRepresentative> sales;
+    String name,nameCopy;
+    int numberOfPersons,numberOfSales,quotaPerSale ,worthOfSales,checkBubbleSort=0;
 
-    public SalesRepresentative(AddPerson person)
+    Scanner sc=new Scanner(System.in);
+    SalesRepresentative[] representatives;
+
+    public void AddPersons()
     {
-        sales=person.getSalesRepresentative();
-
+        System.out.println("how many persons u wanna add?");
+        numberOfPersons=sc.nextInt();
+        sc.nextLine();
+        representatives=new SalesRepresentative[numberOfPersons];
+        for(int i=0;i<numberOfPersons;i++) {
+            SalesRepresentative person=new SalesRepresentative();
+            System.out.println("Enter person name");
+            person.name=sc.nextLine();
+            nameCopy=person.name;
+            System.out.println("how many sales have this person? --> "+nameCopy);
+            person.numberOfSales=sc.nextInt();
+            sc.nextLine();
+            System.out.println("how much is asking per 1 sale? --> "+nameCopy);
+            person.quotaPerSale=sc.nextInt();
+            sc.nextLine();
+            person.worthOfSales=person.numberOfSales*person.quotaPerSale;
+            representatives[i]=person;
+        }
     }
 
-    public void bubbleSortSales()
-    {
-        for(int i=0;i<sales.size()-1;i++)
-        {
-            for(int j=0;j<sales.size()-i-1;j++)
-            {
-                if(sales.get(j).worthOfSales<sales.get(j+1).worthOfSales)
-                {
-                    SalesRepresentative temp=sales.get(j);
-                    sales.set(j,sales.get(j+1));
-                    sales.set(j+1,temp);
+    public SalesRepresentative[] getRepresentatives() {
+        return representatives;
+    }
 
+    public SalesRepresentative[] sort(SalesRepresentative[] representatives)
+    {
+        for(int i=0;i<representatives.length;i++)
+        {
+            for(int j=0;j<representatives.length-i-1;j++)
+            {
+                if(representatives[j].worthOfSales<representatives[j+1].worthOfSales)
+                {
+                    SalesRepresentative temp=representatives[j];
+                    representatives[j]=representatives[j+1];
+                    representatives[j+1]=temp;
                 }
             }
         }
-
+        return  representatives;
     }
 
-    public void printSales()
+    public void printPersons(SalesRepresentative [] representatives)
     {
-        System.out.println("===================================================");
-        System.out.println("               Representative Sales");
-        System.out.println("                         ||");
-        System.out.println("                    ||   ||   ||");
-        System.out.println("                      || || ||");
-        System.out.println("                         ||");
-        for(SalesRepresentative salesRepresentative1 :sales)
-        {
-            System.out.println("name -->"+ salesRepresentative1.name+", numberOfSales-->"+ salesRepresentative1.numberOfSales);
+        System.out.println();
+        if(checkBubbleSort==0) {
+            System.out.println("Persons and their sales ");
+            System.out.println("<<-- --- -- --- -- --- -- --- -- --- -- --- -- --- -- --- -- --- -->>");
+            for (int i = 0; i < numberOfPersons; i++) {
+                System.out.println(" " + representatives[i]);
+            }
+            System.out.println("<<-- --- -- --- -- --- -- --- -- --- -- --- -- --- -- --- -- --- -->>");
         }
+        else
+        {
+            System.out.println("Persons and their sales sorted by worthOfSales ");
+            System.out.println("<<-- --- -- --- -- --- -- --- -- --- -- --- -- --- -- --- -- --- -->>");
+            for (int i = 0; i < numberOfPersons; i++) {
+                System.out.println(" " + representatives[i]);
+            }
+            System.out.println("<<-- --- -- --- -- --- -- --- -- --- -- --- -- --- -- --- -- --- -->>");
+        }
+        checkBubbleSort++;
     }
 
     @Override
     public String toString() {
-        return "{" +
+        return "Person{" +
                 "name='" + name + '\'' +
                 ", numberOfSales=" + numberOfSales +
+                ", quotaPerSale=" + quotaPerSale +
+                ", worthOfSales=" + worthOfSales +
                 '}';
     }
 }
