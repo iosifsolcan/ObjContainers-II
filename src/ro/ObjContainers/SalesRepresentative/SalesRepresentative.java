@@ -5,8 +5,8 @@ package ro.ObjContainers.SalesRepresentative;
 import java.util.*;
 
 public class SalesRepresentative {
-    String name,nameCopy;
-    int numberOfPersons,numberOfSales,quotaPerSale ,worthOfSales,checkBubbleSort=0;
+    private String name;
+    private int numberOfPersons,numberOfSales,quotaPerSale ,worthOfSales,checkBubbleSort=0;
 
     Scanner sc=new Scanner(System.in);
     SalesRepresentative[] representatives;
@@ -21,11 +21,10 @@ public class SalesRepresentative {
             SalesRepresentative person=new SalesRepresentative();
             System.out.println("Enter person name");
             person.name=sc.nextLine();
-            nameCopy=person.name;
-            System.out.println("how many sales have this person? --> "+nameCopy);
+            System.out.println("how many sales have this person? --> "+ person.name);
             person.numberOfSales=sc.nextInt();
             sc.nextLine();
-            System.out.println("how much is asking per 1 sale? --> "+nameCopy);
+            System.out.println("how much is asking per 1 sale? --> "+ person.name);
             person.quotaPerSale=sc.nextInt();
             sc.nextLine();
             person.worthOfSales=person.numberOfSales*person.quotaPerSale;
